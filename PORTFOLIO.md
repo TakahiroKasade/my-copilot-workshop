@@ -1,5 +1,7 @@
 # 待辦清單 Web App
 
+![工作坊完成徽章](https://img.shields.io/badge/GitHub_Copilot_%E5%AF%A6%E6%88%B0%E5%B7%A5%E4%BD%9C%E5%9D%8A-%E5%B7%B2%E5%AE%8C%E6%88%90-1F883D?style=for-the-badge&logo=githubcopilot&logoColor=white)
+
 這是一個在 GitHub Copilot 實戰工作坊中完成的待辦清單 Web App。專案以純前端技術打造，提供簡潔的待辦管理、主題切換與清單篩選功能，並可直接離線開啟使用。
 
 ## 線上展示
