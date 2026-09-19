@@ -12,8 +12,9 @@ const themeLabel = document.querySelector('.theme-label');
 const filterButtons = document.querySelectorAll('.filter-button');
 
 const THEME_STORAGE_KEY = 'offline-todo-theme';
+const FILTER_STORAGE_KEY = 'offline-todo-filter';
+const VALID_FILTERS = ['all', 'active', 'completed'];
 const systemThemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-let activeFilter = 'all';
 
 // 從 localStorage 讀取資料，資料損壞時回到空清單。
 function loadTodos() {
@@ -26,6 +27,14 @@ function loadTodos() {
 }
 
 let todos = loadTodos();
+
+// 讀取並驗證篩選條件，無效值一律回到全部。
+function loadFilter() {
+  const savedFilter = localStorage.getItem(FILTER_STORAGE_KEY);
+  return VALID_FILTERS.includes(savedFilter) ? savedFilter : 'all';
+}
+
+let activeFilter = loadFilter();
 
 // 取得目前應使用的主題，沒有手動設定時跟隨作業系統。
 function getCurrentTheme() {
@@ -101,6 +110,7 @@ function renderTodos() {
 filterButtons.forEach((button) => {
   button.addEventListener('click', () => {
     activeFilter = button.dataset.filter;
+    localStorage.setItem(FILTER_STORAGE_KEY, activeFilter);
     filterButtons.forEach((filterButton) => {
       const isActive = filterButton === button;
       filterButton.classList.toggle('active', isActive);
@@ -108,6 +118,13 @@ filterButtons.forEach((button) => {
     });
     renderTodos();
   });
+});
+
+// 頁面載入時恢復篩選條件，並同步顯示目前選中的按鈕。
+filterButtons.forEach((button) => {
+  const isActive = button.dataset.filter === activeFilter;
+  button.classList.toggle('active', isActive);
+  button.setAttribute('aria-pressed', String(isActive));
 });
 
 // 手動切換後記住選擇；未手動設定時則保留跟隨系統的行為。
