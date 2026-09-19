@@ -92,7 +92,7 @@ function renderTodos() {
   } else if (activeFilter === 'active') {
     emptyState.textContent = '目前沒有未完成事項。';
   } else if (activeFilter === 'completed') {
-    emptyState.textContent = '目前沒有已完成事項。';
+    emptyState.textContent = '\u76ee\u524d\u6c92\u6709\u5df2\u5b8c\u6210\u7684\u4e8b\u9805\uff0c\u9805\u76ee\u672a\u88ab\u522a\u9664\uff0c\u53ea\u662f\u6c92\u6709\u7b26\u5408\u76ee\u524d\u7684\u7be9\u9078\u689d\u4ef6\u3002';
   }
   remainingCount.textContent = `未完成:${todos.filter((todo) => !todo.completed).length} 項`;
 }
