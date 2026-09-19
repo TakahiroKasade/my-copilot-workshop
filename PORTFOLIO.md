@@ -8,7 +8,6 @@
 
 https://TakahiroKasade.github.io/my-copilot-workshop/
 
-> 請將上方網址替換成實際的 GitHub Pages 網址。
 
 ## 功能
 
