@@ -9,27 +9,42 @@
 <body>
   <main class="todo-app">
     <header class="app-header">
-      <p class="eyebrow">今日專注</p>
-      <h1>待辦清單</h1>
+      <div class="heading-row">
+        <div>
+          <p class="eyebrow">今日專注</p>
+          <h1>待辦清單</h1>
+        </div>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false">
+          <span class="theme-icon" aria-hidden="true">🌙</span>
+          <span class="theme-label">深色模式</span>
+        </button>
+      </div>
       <p class="subtitle">把想完成的事，一件一件做好。</p>
     </header>
 
     <form id="todo-form" class="todo-form" autocomplete="off">
       <label class="sr-only" for="todo-input">新增待辦事項</label>
-      <input
-        id="todo-input"
-        class="todo-input"
-        type="text"
-        placeholder="接下來要完成什麼？"
-        maxlength="100"
-      >
-      <button class="add-button" type="submit">新增</button>
+      <div class="input-row">
+        <input
+          id="todo-input"
+          class="todo-input"
+          type="text"
+          placeholder="接下來要完成什麼？"
+          maxlength="100"
+        >
+        <button class="add-button" type="submit">新增</button>
+      </div>
+      <nav class="filter-bar" aria-label="待辦事項篩選">
+        <button class="filter-button active" type="button" data-filter="all" aria-pressed="true">全部</button>
+        <button class="filter-button" type="button" data-filter="active" aria-pressed="false">未完成</button>
+        <button class="filter-button" type="button" data-filter="completed" aria-pressed="false">已完成</button>
+      </nav>
     </form>
 
     <section class="todo-section" aria-labelledby="list-title">
       <h2 id="list-title" class="section-title">事項清單</h2>
       <ul id="todo-list" class="todo-list" aria-live="polite"></ul>
-      <p id="empty-state" class="empty-state">還沒有任何待辦事項,新增一個吧!</p>
+      <p id="empty-state" class="empty-state"></p>
     </section>
 
     <footer class="app-footer">

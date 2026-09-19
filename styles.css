@@ -8,7 +8,50 @@
   --color-accent: #247a68;
   --color-accent-dark: #195e51;
   --color-danger: #b84c54;
+  --color-on-accent: #ffffff;
+  --color-danger-soft: #fbecef;
+  --color-focus: rgba(36, 122, 104, 0.25);
+  --color-page-mid: #f8fbf9;
+  --color-page-end: #e5f0eb;
   --shadow-card: 0 18px 45px rgba(34, 79, 68, 0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-page: #15221f;
+    --color-surface: #1d302b;
+    --color-surface-soft: #243b35;
+    --color-text: #e4f0eb;
+    --color-muted: #a5bab3;
+    --color-border: #3d5a51;
+    --color-accent: #66c2a7;
+    --color-accent-dark: #8bd6bf;
+    --color-danger: #f08b91;
+    --color-on-accent: #10221d;
+    --color-danger-soft: #482b30;
+    --color-focus: rgba(102, 194, 167, 0.3);
+    --color-page-mid: #1d302b;
+    --color-page-end: #15221f;
+    --shadow-card: 0 18px 45px rgba(0, 0, 0, 0.25);
+  }
+}
+
+:root[data-theme="dark"] {
+  --color-page: #15221f;
+  --color-surface: #1d302b;
+  --color-surface-soft: #243b35;
+  --color-text: #e4f0eb;
+  --color-muted: #a5bab3;
+  --color-border: #3d5a51;
+  --color-accent: #66c2a7;
+  --color-accent-dark: #8bd6bf;
+  --color-danger: #f08b91;
+  --color-on-accent: #10221d;
+  --color-danger-soft: #482b30;
+  --color-focus: rgba(102, 194, 167, 0.3);
+  --color-page-mid: #1d302b;
+  --color-page-end: #15221f;
+  --shadow-card: 0 18px 45px rgba(0, 0, 0, 0.25);
 }
 
 * {
@@ -20,7 +63,7 @@ body {
   margin: 0;
   padding: 32px 16px;
   color: var(--color-text);
-  background: linear-gradient(145deg, var(--color-page), #f8fbf9 60%, #e5f0eb);
+  background: linear-gradient(145deg, var(--color-page), var(--color-page-mid) 60%, var(--color-page-end));
   font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
 }
 
@@ -36,6 +79,13 @@ body {
 
 .app-header {
   margin-bottom: 28px;
+}
+
+.heading-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
 }
 
 .eyebrow {
@@ -58,10 +108,33 @@ h1 {
   font-size: 0.95rem;
 }
 
+.theme-toggle {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  color: var(--color-text);
+  background: var(--color-surface-soft);
+  border: 1px solid var(--color-border);
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.theme-toggle:hover {
+  border-color: var(--color-accent);
+}
+
 .todo-form {
+  display: block;
+  margin-bottom: 30px;
+}
+
+.input-row {
   display: flex;
   gap: 10px;
-  margin-bottom: 30px;
 }
 
 .todo-input {
@@ -76,7 +149,7 @@ h1 {
 }
 
 .todo-input:focus-visible {
-  outline: 3px solid rgba(36, 122, 104, 0.2);
+  outline: 3px solid var(--color-focus);
   border-color: var(--color-accent);
 }
 
@@ -85,8 +158,9 @@ button {
 }
 
 .add-button {
+  min-width: 76px;
   padding: 0 20px;
-  color: #fff;
+  color: var(--color-on-accent);
   background: var(--color-accent);
   border: 0;
   border-radius: 10px;
@@ -101,9 +175,36 @@ button {
 
 .add-button:focus-visible,
 .delete-button:focus-visible,
-.todo-checkbox:focus-visible {
-  outline: 3px solid rgba(36, 122, 104, 0.25);
+.todo-checkbox:focus-visible,
+.filter-button:focus-visible,
+.theme-toggle:focus-visible {
+  outline: 3px solid var(--color-focus);
   outline-offset: 2px;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.filter-button {
+  flex: 1;
+  padding: 8px 10px;
+  color: var(--color-muted);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.88rem;
+}
+
+.filter-button:hover,
+.filter-button.active {
+  color: var(--color-accent-dark);
+  background: var(--color-surface-soft);
+  border-color: var(--color-accent);
+  font-weight: 700;
 }
 
 .section-title {
@@ -161,7 +262,7 @@ button {
 }
 
 .delete-button:hover {
-  background: #fbecef;
+  background: var(--color-danger-soft);
 }
 
 .empty-state {
@@ -206,7 +307,19 @@ button {
   }
 
   .todo-form {
+    display: block;
+  }
+
+  .input-row {
     flex-direction: column;
+  }
+
+  .heading-row {
+    align-items: flex-start;
+  }
+
+  .theme-toggle {
+    padding: 7px 8px;
   }
 
   .add-button {
